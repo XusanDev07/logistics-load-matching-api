@@ -1,0 +1,13 @@
+asgiref==3.9.1
+async-timeout==5.0.1
+Django==5.2.4
+django-debug-toolbar==6.0.0
+django-redis==6.0.0
+djangorestframework==3.16.0
+djangorestframework_simplejwt==5.5.1
+psycopg2-binary==2.9.10
+PyJWT==2.10.1
+python-dotenv==1.1.1
+redis==6.2.0
+sqlparse==0.5.3
+typing_extensions==4.14.1

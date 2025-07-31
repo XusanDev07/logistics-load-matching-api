@@ -371,3 +371,28 @@ class BulkDriverAvailabilityAPIView(APIView):
             'updated_at': timezone.now().isoformat()
         }
         cache.set(cache_key, cache_data, 3600)
+
+    def _bulk_invalidate_matches(self):
+        """
+        Invalidate all load match caches after bulk update
+        """
+        try:
+            # In a real application, you'd want more sophisticated cache invalidation
+            # For now, we'll clear all load match caches
+            from apps.loads.models import Load
+
+            recent_loads = Load.objects.filter(
+                status='POSTED',
+                pickup_date__gte=timezone.now().date()
+            ).values_list('id', flat=True)
+
+            invalidated_count = 0
+            for load_id in recent_loads:
+                cache_key = f"load_matches:{load_id}"
+                if cache.delete(cache_key):
+                    invalidated_count += 1
+
+            logger.info(f"Bulk invalidated {invalidated_count} cached match results")
+
+        except Exception as e:
+            logger.warning(f"Failed to bulk invalidate matches: {str(e)}")

@@ -12,5 +12,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from .base import *
 from .database import *
+from .enviroments import *
 from .rest_framework import *
 from .rest_framework_simplejwt import *

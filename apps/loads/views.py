@@ -129,7 +129,9 @@ class LoadMatchListAPIView(APIView):
             )
 
     def _calculate_match_score(self, load, driver):
-        """Calculate comprehensive match score for driver-load pair"""
+        """
+        Calculate comprehensive match score for driver-load pair
+        """
 
         # Distance scoring (35%)
         distance_category = get_distance_category(load.pickup_city, driver.home_city)
